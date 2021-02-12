@@ -1,0 +1,13 @@
+---
+- name: creating users
+  hosts: all
+  become: true
+
+  tasks:
+  - name: creating users
+    user: 
+     name: "{{item}}"
+     state: present
+    with_items:
+            - user10
+            - user20

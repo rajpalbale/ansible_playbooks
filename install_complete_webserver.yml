@@ -1,0 +1,37 @@
+---
+- name: Installing httpd
+  hosts: webservers
+  become: true
+
+  tasks:
+  - name: Installing httpd package
+    yum: 
+     name: httpd
+     state: installed
+
+  - name: copy index.html file
+    copy:
+     src: /home/ansible/index.html
+     dest: /var/www/html
+     mode: 0666
+  
+  - name: copy kanna.JPG file
+    copy:
+     src: /home/ansible/kanna.JPG
+     dest: /var/www/html/
+     mode: 0666
+
+  - name: copy raj.jpg file
+    copy:
+     src: /home/ansible/raj.jpg
+     dest: /var/www/html/
+     mode: 0666
+
+  - name: starting httpd service
+    service:
+     name: httpd
+     state: started
+  - name: enable service httpd
+    ansible.builtin.service:
+      name: httpd
+      enabled: yes
